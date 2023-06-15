@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>wls-soap-server</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>wls-soap-server</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>oracle.java.jaxws</artifactId>
+            <version>14.1.1-0-0</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <webXml>src\main\resources\WEB-INF\web.xml</webXml>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.oracle.weblogic</groupId>
+                <artifactId>weblogic-maven-plugin</artifactId>
+                <version>14.1.1-0-0</version>
+                <!-- These are for convenience, can be supplied on cmd line or exec mapping -->
+                <configuration>
+                    <user>admin</user>
+                    <password>welcome1</password>
+                    <name>${project.build.finalName}</name>
+                    <source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>wsgen</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>wsgen</goal>
+                        </goals>
+                        <configuration>
+                            <destDir>${project.build.directory}/wsgenOutput/</destDir>
+                            <sei>com.example.wlssoap.DynamicWSImplService</sei>
+                            <verbose>false</verbose>
+                            <genWsdl>true</genWsdl>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

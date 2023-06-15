@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:ns0="http://wlssoap.example.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://wlssoap.example.com/">
+   <xsd:complexType name="sayHelloWorld">
+      <xsd:sequence>
+         <xsd:element name="arg0" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="sayHelloWorldResponse">
+      <xsd:sequence>
+         <xsd:element name="return" type="xsd:string" minOccurs="0"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="subtract">
+      <xsd:sequence>
+         <xsd:element name="arg0" type="xsd:int"/>
+         <xsd:element name="arg1" type="xsd:int"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="subtractResponse">
+      <xsd:sequence>
+         <xsd:element name="return" type="xsd:int"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="sayHelloWorld" type="ns0:sayHelloWorld"/>
+   <xsd:element name="sayHelloWorldResponse" type="ns0:sayHelloWorldResponse"/>
+   <xsd:element name="subtract" type="ns0:subtract"/>
+   <xsd:element name="subtractResponse" type="ns0:subtractResponse"/>
+</xsd:schema>
